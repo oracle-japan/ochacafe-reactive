@@ -1,6 +1,6 @@
 # Reactive Programing デモのソース 
 
-For [OCHaCafe 3 - #4 挑戦! Reactiveプログラミング](https://connpass.com/event/189340/)
+For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connpass.com/event/189340/)
 
 
 ## デモのソース
