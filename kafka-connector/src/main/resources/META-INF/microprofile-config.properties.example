@@ -1,0 +1,23 @@
+
+# Microprofile server properties
+server.port=8080
+server.host=0.0.0.0
+
+mp.messaging.incoming.kafka-sub.connector=helidon-kafka
+mp.messaging.incoming.kafka-sub.topic=stream01
+mp.messaging.incoming.kafka-sub.auto.offset.reset=latest
+mp.messaging.incoming.kafka-sub.enable.auto.commit=true
+mp.messaging.incoming.kafka-sub.group.id=GROUP_01
+
+mp.messaging.outgoing.kafka-pub.connector=helidon-kafka
+mp.messaging.outgoing.kafka-pub.topic=stream01
+
+mp.messaging.connector.helidon-kafka.bootstrap.servers=streaming.us-phoenix-1.oci.oraclecloud.com:9092
+mp.messaging.connector.helidon-kafka.sasl.mechanism=PLAIN
+mp.messaging.connector.helidon-kafka.security.protocol=SASL_SSL
+mp.messaging.connector.helidon-kafka.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username='TENANT/USERID/POOLID' password='PW';
+mp.messaging.connector.helidon-kafka.key.serializer=org.apache.kafka.common.serialization.StringSerializer
+mp.messaging.connector.helidon-kafka.value.serializer=org.apache.kafka.common.serialization.StringSerializer
+mp.messaging.connector.helidon-kafka.key.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+mp.messaging.connector.helidon-kafka.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
