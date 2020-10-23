@@ -118,19 +118,14 @@ public class ReactiveTestResource {
     public String callReactive(@QueryParam("str") String str) {
 
         return measure(() -> {
-            try{
-                return ReactiveStreams
-                .of(Optional.ofNullable(str).orElse(defaultStr).split(",")) // PublisherBuilder
-                .map(processor::process) // PublisherBuilder
-                .collect(Collectors.joining(",")) // CompletionRunner
-                .run() // CompletionStage
-                .toCompletableFuture() // CompletableFuture
-                .get(); // String
-            }catch(Exception e){
-                throw new RuntimeException("ReactiveStreams error: " + e.getMessage());
-            }
+            return ReactiveStreams
+            .of(Optional.ofNullable(str).orElse(defaultStr).split(",")) // PublisherBuilder
+            .map(processor::process) // PublisherBuilder
+            .collect(Collectors.joining(",")) // CompletionRunner
+            .run() // CompletionStage
+            .toCompletableFuture() // CompletableFuture
+            .join(); // String
         });
-
     }
 
 
@@ -168,15 +163,11 @@ public class ReactiveTestResource {
         final ConcurrentHashMap<Object, String> dict = new ConcurrentHashMap<>(); // 変換辞書
 
         return measure(() -> {
-            try{
-                Multi
-                  .just(args)
-                  .flatMap(x -> Single.just(x).observeOn(es).peek(s -> dict.put(s, processor.process(s))))
-                  .collectList().toCompletableFuture().get(); // この結果は使わない
-                return Arrays.stream(args).map(dict::get).collect(Collectors.joining(","));
-            }catch(Exception e){
-                throw new RuntimeException("Helidon reactive operators error: " + e.getMessage());
-            }
+            Multi
+              .just(args)
+              .flatMap(x -> Single.just(x).observeOn(es).peek(s -> dict.put(s, processor.process(s))))
+              .collectList().toCompletableFuture().join(); // この結果は使わない
+            return Arrays.stream(args).map(dict::get).collect(Collectors.joining(","));
         });
     }
 
