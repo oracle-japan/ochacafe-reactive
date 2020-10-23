@@ -6,10 +6,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.faulttolerance.Asynchronous;
 
 @ApplicationScoped
+@Path("/")
 public class Processor {
 
     private static Logger logger = Logger.getLogger(Processor.class.getSimpleName());
@@ -37,6 +43,15 @@ public class Processor {
     @Asynchronous // MicroProfile Faault Tolerance
     public CompletionStage<String> processAsync(String s) {
         return CompletableFuture.completedFuture(process(s));
+    }
+
+    /**
+     * RESTサービスバージョン
+     * /process
+     */
+    @GET @Path("/process") @Produces(MediaType.TEXT_PLAIN)
+    public String processRestService(@QueryParam("str") String str) {
+        return process(str);
     }
 
 

@@ -1,5 +1,6 @@
 package oracle.demo.async;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
@@ -35,15 +36,6 @@ public class AsyncClientResource {
 
     @Inject private Processor processor;
 
-    /**
-     * ターゲットサービス - クライアントは自身のサーバーのこのエンドポイントを呼び出す
-     * /async-client/process
-     */
-    @GET @Path("/process") @Produces(MediaType.TEXT_PLAIN)
-    public String process(@QueryParam("str") String str) {
-        return processor.process(str);
-    }
-
     ////////////////////////////////////////////
 
     /**
@@ -57,7 +49,7 @@ public class AsyncClientResource {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
             .map(x -> {
                 return client
-                .target(uriInfo.getBaseUri()).path("/async-client/process")
+                .target(uriInfo.getBaseUri()).path("/process")
                 .queryParam("str", x)
                 .request()
                 .get(String.class); // String
@@ -78,7 +70,7 @@ public class AsyncClientResource {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
             .map(x -> {
                 return client
-                .target(uriInfo.getBaseUri()).path("/async-client/process")
+                .target(uriInfo.getBaseUri()).path("/process")
                 .queryParam("str", x)
                 .request()
                 .async() // !!!
@@ -88,7 +80,7 @@ public class AsyncClientResource {
             .stream()
             .map(f -> { // 実行結果を取得: Future<String> -> String
                 try{
-                    return ((Future<String>)f).get();
+                    return f.get();
                 }catch(Exception e){ throw new RuntimeException(e.getMessage(), e); }
             }) 
             .collect(Collectors.joining(","));
@@ -107,7 +99,7 @@ public class AsyncClientResource {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
             .map(x -> {
                 return client
-                .target(uriInfo.getBaseUri()).path("/async-client/process")
+                .target(uriInfo.getBaseUri()).path("/process")
                 .queryParam("str", x)
                 .request()
                 .rx() // !!!
@@ -115,7 +107,7 @@ public class AsyncClientResource {
             })
             .collect(Collectors.toList()) // List<CompletionStage>
             .stream()
-            .map(f -> ((CompletionStage<String>)f).toCompletableFuture().join()) // CompletionStage<String> -> String
+            .map(f -> f.toCompletableFuture().join()) // CompletionStage<String> -> String
             .collect(Collectors.joining(","));
         });
 
@@ -126,7 +118,7 @@ public class AsyncClientResource {
      * MicroProfile 非同期RESTクライアント - 呼び出し用インターフェース
      * ※タイプセーフな呼び出しがミソ / 返り値を CompletionStage にすると非同期になる
      */
-    @Path("/async-client")
+    @Path("/")
     public static interface ProcessClient {
         @GET @Path("/process") @Produces(MediaType.TEXT_PLAIN)
         public CompletionStage<String> process(@QueryParam("str") String str);
@@ -150,7 +142,7 @@ public class AsyncClientResource {
             })
             .collect(Collectors.toList()) // List<CompletionStage>
             .stream()
-            .map(f -> ((CompletionStage<String>)f).toCompletableFuture().join()) // CompletionStage<String> -> String 
+            .map(f -> f.toCompletableFuture().join()) // CompletionStage<String> -> String 
             .collect(Collectors.joining(","));
         });
 
