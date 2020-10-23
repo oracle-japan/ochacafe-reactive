@@ -30,7 +30,7 @@ public class AsyncTestResource {
     private final String defaultStr = "abc,lmn,xyz";
 
     @Inject 
-    private Processor processor;
+    private Processor processor; // processor::process は処理に3秒かかる
 
     /**
      * 同期呼び出しパターン
@@ -40,9 +40,10 @@ public class AsyncTestResource {
     public String callSync(@QueryParam("str") String str) {
 
         return measure(() -> {
-            return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
-            .map(processor::process)
-            .collect(Collectors.joining(","));
+            return 
+            Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(",")) // {"abc","lmn","xyz"}
+            .map(processor::process) // {"CBA","NML","ZYX"}
+            .collect(Collectors.joining(",")); // "CBA,NML,ZYX"
         });
 
     }
@@ -77,12 +78,13 @@ public class AsyncTestResource {
 
         return measure(() -> {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
-                .map(x -> CompletableFuture.supplyAsync(() -> { // ex1.submit()でもいけるけど...
+                .map(x -> CompletableFuture.supplyAsync(() -> { // Future f = ex1.submit()でもいけるけど...
                     return processor.process(x);    
-                }, ex1))
+                }, ex1)) // {CompletableFuture, CompletableFuture, CompletableFuture}
+                // 一旦collectしないと個々に後続のmap処理(joinでブロックされる)まで流れてしまい、結果並列処理にならない
                 .collect(Collectors.toList()) // List<CompletableFuture>
                 .stream()
-                .map(CompletableFuture::join) // 実行結果を取得
+                .map(CompletableFuture::join) // 実行結果を取得　{"CBA","NML","ZYX"}
                 .collect(Collectors.joining(","));
         });
 
