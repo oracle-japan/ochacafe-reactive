@@ -60,7 +60,7 @@ public class AsyncTestResource {
 
         return measure(() -> {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
-            .parallel() // 並列処理
+            .parallel() // 並列処理 配列は順序付けされたstreamなので検出順序は維持される
             .map(processor::process)
             .collect(Collectors.joining(","));
         });
