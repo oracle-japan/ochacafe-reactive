@@ -34,7 +34,7 @@ curl localhost:8080/async-test/sync?str=abc,lmn,xyz
 curl localhost:8080/async-test/parallel?str=abc,lmn,xyz
 
 # 非同期呼び出しパターン - JDKのスレッドプールを使って非同期処理
-curl localhost:8080/async-test/async1?str=abc,lmn,xyz
+curl "localhost:8080/async-test/async1?str=abc,lmn,xyz&nthreads=3"
 
 # 非同期呼び出しパターン - helidonのスレッドプールを使って非同期処理
 curl localhost:8080/async-test/async2?str=abc,lmn,xyz

@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -69,24 +70,30 @@ public class AsyncTestResource {
 
     /**
      * 非同期呼び出しパターン - JDKのスレッドプールを使って非同期処理
-     * curl localhost:8080/async-test/async1?str=abc,lmn,xyz
+     * curl "localhost:8080/async-test/async1?str=abc,lmn,xyz&nthreads=3"
      */
-    private final ExecutorService ex1 = Executors.newCachedThreadPool();
-
     @GET @Path("/async1") @Produces(MediaType.TEXT_PLAIN)
-    public String callAsync1(@QueryParam("str") String str) {
+    public String callAsync1(@QueryParam("str") String str, @QueryParam("nthreads") String nthreads) {
 
-        return measure(() -> {
-            return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
-                .map(x -> CompletableFuture.supplyAsync(() -> { // Future f = ex1.submit()でもいけるけど...
-                    return processor.process(x);    
-                }, ex1)) // {CompletableFuture, CompletableFuture, CompletableFuture}
-                // 一旦collectしないと個々に後続のmap処理(joinでブロックされる)まで流れてしまい、結果並列処理にならない
-                .collect(Collectors.toList()) // List<CompletableFuture>
-                .stream()
-                .map(CompletableFuture::join) // 実行結果を取得　{"CBA","NML","ZYX"}
-                .collect(Collectors.joining(","));
-        });
+        final int nThreads = Integer.parseInt(Optional.ofNullable(nthreads).orElse("3")); // デフォルト=3
+        logger.info("#Threads: " + nThreads);
+        final ExecutorService ex = Executors.newFixedThreadPool(nThreads); // 本来はもっと長いライフタイム
+        try{
+            return measure(() -> {
+                return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
+                    .map(x -> CompletableFuture.supplyAsync(() -> { // Future f = ex1.submit()でもいけるけど...
+                        return processor.process(x);    
+                    }, ex)) // {CompletableFuture, CompletableFuture, CompletableFuture}
+                    // 一旦collectしないと個々に後続のmap処理(joinでブロックされる)まで流れてしまい、結果並列処理にならない
+                    .collect(Collectors.toList()) // List<CompletableFuture>
+                    .stream()
+                    .map(CompletableFuture::join) // 実行結果を取得　{"CBA","NML","ZYX"}
+                    .collect(Collectors.joining(","));
+            });
+        }finally{
+            ex.shutdown();
+            try { ex.awaitTermination(1, TimeUnit.SECONDS); } catch(InterruptedException e){}
+        }
 
     }
 
@@ -95,7 +102,7 @@ public class AsyncTestResource {
      * 非同期呼び出しパターン - helidonのスレッドプールを使って非同期処理
      * curl localhost:8080/async-test/async2?str=abc,lmn,xyz
      */
-    private final ExecutorService ex2 = ThreadPoolSupplier.builder()
+    private final ExecutorService ex = ThreadPoolSupplier.builder()
         .threadNamePrefix("helidon-pool-").build().get();  // helidonが提供するスレッドプール
 
     @GET @Path("/async2") @Produces(MediaType.TEXT_PLAIN)
@@ -105,7 +112,7 @@ public class AsyncTestResource {
             return Arrays.stream(Optional.ofNullable(str).orElse(defaultStr).split(","))
                 .map(x -> CompletableFuture.supplyAsync(() -> {
                     return processor.process(x);    
-                }, ex2))
+                }, ex))
                 .collect(Collectors.toList()) // List<CompletableFuture>
                 .stream()
                 .map(CompletableFuture::join) // 実行結果を取得
