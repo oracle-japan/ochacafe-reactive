@@ -95,7 +95,9 @@ curl localhost:8080/reactive-messaging/process/key1?value=val1
 # Kafka Connector でメッセージを送信＆受信
 curl localhost:8080/kafka/publish?message=Hello+Ochacafe%21
 
-curl localhost:8080/kafka/publish?message=Hello+Ochacafe1;curl localhost:8080/kafka/publish?message=Hello+Ochacafe2;curl localhost:8080/kafka/publish?message=Hello+Ochacafe3;curl localhost:8080/kafka/publish?message=Hello+Ochacafe4;curl localhost:8080/kafka/publish?message=Hello+Ochacafe5;curl localhost:8080/kafka/publish?message=Hello+Ochacafe6;curl localhost:8080/kafka/publish?message=Hello+Ochacafe7;curl localhost:8080/kafka/publish?message=Hello+Ochacafe8
+curl -X POST -H "Content-type: application/json"\
+ -d '["Ochacafe #1","Ochacafe #2","Ochacafe #3","Ochacafe #4","Ochacafe #5","Ochacafe #6","Ochacafe #7","Ochacafe #8"]'\
+ localhost:8080/kafka/publish
 
 ### File Connector
 ## cd file-connector; java -jar target/file-connector.jar
