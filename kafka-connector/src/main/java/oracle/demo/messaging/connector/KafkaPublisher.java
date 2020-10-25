@@ -2,7 +2,6 @@ package oracle.demo.messaging.connector;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Flow;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.SubmissionPublisher;
 import java.util.logging.Logger;
 
