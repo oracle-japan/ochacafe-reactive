@@ -39,7 +39,7 @@ public class KafkaPublisher {
         }
 
         publisher.submit(KafkaMessage.of(key.toString(), message, () -> {
-            logger.fine(String.format("Ack received for the message: %s(%d)", message, key));
+            logger.fine(String.format("Ack received: %s(%d)", message, key));
             return CompletableFuture.completedFuture(null);
         }));
     }
