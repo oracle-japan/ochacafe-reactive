@@ -24,7 +24,7 @@ public class FileProcess {
  
     /**
      * File Connectorからファイルを読み込む #1
-     * pas-by-reference=trueにして、ファイルパスを渡す
+     * pass-by-reference=trueにして、ファイルパスを渡す
      * メソッドの中でファイルにアクセスする必要があるが、auto ackが走るとファイルを
      * 処理する前にアーカイブされてしまうので、ack strategyをmanualにして、ackの処理を
      * 後続の処理に委譲している
@@ -34,23 +34,26 @@ public class FileProcess {
     @Acknowledgment(Acknowledgment.Strategy.MANUAL)
     public Message<byte[]> in(InFileMessage<Path> message) throws IOException{
         logger.info("--- in() ---");
-        return Message.of(Files.readAllBytes(message.getPayload()), message::ack);
+        byte[] payload = Files.readAllBytes(message.getPayload());
+        logger.info("[payload]\n" + new String(payload));
+        return Message.of(payload, message::ack);
     }
  
     
     /**
      * File Connectorからファイルを読み込む #2
-     * pas-by-reference=falseにして、ファイルのコンテンツをbyte[]で渡すケース
+     * pass-by-reference=falseにして、ファイルのコンテンツをbyte[]で渡すケース
      * File Connectorがファイルの内容を読み込んでこのメソッドが呼ばれるので、
      * アーカイブのタイミングを計る必要がない、したがってauto ackにしている
      */
-    //@Incoming("file-in2")
-    //@Outgoing("file-process")
-    //public byte[] in2(InFileMessage<byte[]> message) throws IOException{
-    //    logger.info("--- in2() ---");
-    //    return message.getPayload();
-    //}
-    
+/*    
+    @Incoming("file-in2")
+    @Outgoing("file-process")
+    public Message<byte[]> in2(InFileMessage<byte[]> message) throws IOException{
+        logger.info("--- in2() ---");
+        return Message.of(message.getPayload());
+    }
+*/    
 
     /**
      * File Connectorを経由してファイルを書き出す
