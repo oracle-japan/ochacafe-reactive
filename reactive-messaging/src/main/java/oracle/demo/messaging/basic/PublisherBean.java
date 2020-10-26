@@ -31,6 +31,7 @@ public class PublisherBean {
         return publisher.submit(message);
     }
 
+    // このメソッドは起動時に一回だけ呼び出される
     @Outgoing("messaging-test-1")
     public Publisher<FlowMessage> preparePublisher() {
         logger.info("@Outgoing(\"messaging-test-1\")");
@@ -39,24 +40,24 @@ public class PublisherBean {
                 .buildRs();
     }
 
-/*
+
     ///// 実装方法 その2
 
     private final LinkedBlockingDeque<FlowMessage> queue = new LinkedBlockingDeque<>();
 
-    public void submit(FlowMessage messsage){
+    public void submit2(FlowMessage messsage){
         try{
             queue.put(messsage);
         }catch(Exception e){ throw new RuntimeException("cannot submit message: " + e.getMessage(), e);}
     }
 
-    @Outgoing("messaging-test-1")
-    public FlowMessage publish() {
+    //@Outgoing("messaging-test-1")
+    public FlowMessage publish2() {
         logger.info("@Outgoing(\"messaging-test-1\")");
         try{
             return queue.take(); // キューにデータが存在するまでブロックする
         }catch(Exception e){ throw new RuntimeException("cannot get message from the queue", e);}
     }
-*/
+
 
 }
