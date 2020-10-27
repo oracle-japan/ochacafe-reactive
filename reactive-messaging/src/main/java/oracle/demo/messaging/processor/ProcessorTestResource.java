@@ -24,7 +24,7 @@ public class ProcessorTestResource {
     @Inject MsgProcessingBean processor;
 
     /**
-     * MicroProfile Reactive Streams Messagning - Processor でチャネルを連結
+     * MicroProfile Reactive Messagning - Processor でチャネルを連結
      * curl localhost:8080/reactive-messaging/process/key1?value=val1
      */
     @GET @Path("/process/{key}") @Produces(MediaType.TEXT_PLAIN)
@@ -35,7 +35,7 @@ public class ProcessorTestResource {
     }
 
     /**
-     * MicroProfile Reactive Streams Messagning - Processor でチャネルを連結
+     * MicroProfile Reactive Messagning - Processor でチャネルを連結
      * curl -X POST -H "Content-type: application/json" -d '{"key":"key1","value":"val1"}' localhost:8080/reactive-messaging/process
      */
     @POST @Path("/process") @Produces(MediaType.TEXT_PLAIN)

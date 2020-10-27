@@ -81,11 +81,11 @@ curl localhost:8080/reactive/helidon?str=abc,lmn,xyz
 # RxJava を使う - flatMapを使って並列処理にする
 curl localhost:8080/reactive/rxjava?str=abc,lmn,xyz
 
-# MicroProfile Reactive Streams Messagning で実装
+# MicroProfile Reactive Messagning で実装
 curl localhost:8080/reactive-messaging/basic?str=abc,lmn,xyz
 
 ##
-# MicroProfile Reactive Streams Messagning - Processor でチャネルを連結
+# MicroProfile Reactive Messagning - Processor でチャネルを連結
 curl localhost:8080/reactive-messaging/process/key1?value=val1
 
 

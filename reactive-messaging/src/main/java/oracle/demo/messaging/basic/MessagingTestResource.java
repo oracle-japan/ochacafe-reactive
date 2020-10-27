@@ -28,7 +28,7 @@ public class MessagingTestResource {
     private PublisherBean publisher;
 
     /**
-     * 非同期呼び出しパターン - MicroProfile Reactive Streams Messagning で実装
+     * 非同期呼び出しパターン - MicroProfile Reactive Messagning で実装
      * curl localhost:8080/reactive-messaging/basic?str=abc,lmn,xyz
      */
     @GET @Path("/basic") @Produces(MediaType.TEXT_PLAIN)
