@@ -1,16 +1,13 @@
 package oracle.demo.async;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Future;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -23,8 +20,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
-import oracle.demo.common.Processor;
-
 
 @ApplicationScoped
 @Path("/async-client")
@@ -33,8 +28,6 @@ public class AsyncClientResource {
     private static Logger logger = Logger.getLogger(AsyncClientResource.class.getName());
     private final Client client = ClientBuilder.newClient(); // thread safe
     private final String defaultStr = "abc,lmn,xyz";
-
-    @Inject private Processor processor;
 
     ////////////////////////////////////////////
 

@@ -3,9 +3,6 @@ package oracle.demo.reactive.rs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import org.reactivestreams.Publisher;
@@ -15,6 +12,7 @@ public class RsPublisher<T> implements Publisher<T> {
 
     private static final Logger logger = Logger.getLogger(RsPublisher.class.getName());
 
+    @SuppressWarnings("unused") 
     private final String name;
     private final List<RsSubscription<T>> subscriptions = Collections.synchronizedList(new ArrayList<>());
 
@@ -25,7 +23,7 @@ public class RsPublisher<T> implements Publisher<T> {
 
     @Override
     public void subscribe(Subscriber<? super T> subscriber) {
-        RsSubscription<T> subscription = new RsSubscription(this, subscriber);
+        RsSubscription<T> subscription = new RsSubscription<>(this, subscriber);
         subscriptions.add(subscription);
     }
 
