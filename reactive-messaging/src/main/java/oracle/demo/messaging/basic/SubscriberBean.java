@@ -21,9 +21,9 @@ public class SubscriberBean {
 
     // 処理を直接記述する方法
     // このメッセージはonNext()のタイミングで毎回呼び出される
-    @Incoming("messaging-test-1")
+    @Incoming("messaging-demo")
     public void consume(FlowMessage message) {
-        logger.info("@Incoming(\"messaging-test-1\")");
+        logger.info("@Incoming(\"messaging-demo\")");
         try{
             final String response = processor.process(message.getRequest()); 
             message.complete(response); // メッセージに実行結果をセット
@@ -37,9 +37,9 @@ public class SubscriberBean {
     // 処理を直接記述せずに、Subscriberを指定する方法
     // このメソッドは起動時に一回だけ呼び出される
     // 実際の処理は、SubscriberのonNext()が行う
-    //@Incoming("messaging-test-1")
+    //@Incoming("messaging-demo")
     public Subscriber<FlowMessage> prepareSubscriber() {
-        logger.info("@Incoming(\"messaging-test-1\")");
+        logger.info("@Incoming(\"messaging-demo\")");
         return FlowAdapters.toSubscriber(new FlowSubscriber());
     }
 

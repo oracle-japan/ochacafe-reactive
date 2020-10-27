@@ -32,9 +32,9 @@ public class PublisherBean {
     }
 
     // このメソッドは起動時に一回だけ呼び出される
-    @Outgoing("messaging-test-1")
+    @Outgoing("messaging-demo")
     public Publisher<FlowMessage> preparePublisher() {
-        logger.info("@Outgoing(\"messaging-test-1\")");
+        logger.info("@Outgoing(\"messaging-demo\")");
         return ReactiveStreams
                 .fromPublisher(FlowAdapters.toPublisher(publisher))
                 .buildRs();
@@ -51,9 +51,9 @@ public class PublisherBean {
         }catch(Exception e){ throw new RuntimeException("cannot submit message: " + e.getMessage(), e);}
     }
 
-    //@Outgoing("messaging-test-1")
+    //@Outgoing("messaging-demo")
     public FlowMessage publish2() {
-        logger.info("@Outgoing(\"messaging-test-1\")");
+        logger.info("@Outgoing(\"messaging-demo\")");
         try{
             return queue.take(); // キューにデータが存在するまでブロックする
         }catch(Exception e){ throw new RuntimeException("cannot get message from the queue", e);}
