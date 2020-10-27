@@ -19,7 +19,7 @@ import oracle.demo.messaging.processor.KeyValueMessage.KeyValue;
 @Path("/reactive-messaging")
 @ApplicationScoped
 public class ProcessorTestResource {
-    private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getSimpleName());
+    private final static Logger logger = Logger.getLogger(ProcessorTestResource.class.getSimpleName());
 
     @Inject MsgProcessingBean processor;
 
