@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,7 +22,8 @@ import oracle.demo.messaging.processor.KeyValueMessage.KeyValue;
 public class ProcessorTestResource {
     private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getName());
 
-    @Inject MsgProcessingBean processor;
+    @Inject
+    private MsgProcessingBean processor;
 
     /**
      * MicroProfile Reactive Streams Messagning - Processor でチャネルを連結

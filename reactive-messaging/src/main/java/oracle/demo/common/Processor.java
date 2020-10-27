@@ -6,12 +6,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.faulttolerance.Asynchronous;
 
 @ApplicationScoped
@@ -19,6 +21,10 @@ import org.eclipse.microprofile.faulttolerance.Asynchronous;
 public class Processor {
 
     private static Logger logger = Logger.getLogger(Processor.class.getSimpleName());
+
+    @Inject @ConfigProperty(name="demo.processor.delay", defaultValue="3000")
+    private long delay;
+
 
     /**
      * シンプルバージョン 
@@ -29,7 +35,7 @@ public class Processor {
 
         // 意図的に3秒間スリープ
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.MILLISECONDS.sleep(delay);
         } catch (InterruptedException e) {}
 
         return result;

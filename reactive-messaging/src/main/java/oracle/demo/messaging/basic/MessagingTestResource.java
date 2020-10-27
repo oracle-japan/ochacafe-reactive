@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,7 +25,7 @@ public class MessagingTestResource {
     private static final Logger logger = Logger.getLogger(MessagingTestResource.class.getName());
     private final String defaultStr = "abc,lmn,xyz";
 
-    @Inject 
+    @Inject
     private PublisherBean publisher;
 
     /**
