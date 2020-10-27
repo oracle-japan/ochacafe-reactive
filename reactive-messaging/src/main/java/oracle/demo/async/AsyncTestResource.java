@@ -26,7 +26,7 @@ import oracle.demo.common.Processor;
 @Path("/async-test")
 public class AsyncTestResource {
 
-    private static final Logger logger = Logger.getLogger(AsyncTestResource.class.getName());
+    private static final Logger logger = Logger.getLogger(AsyncTestResource.class.getSimpleName());
     private final String defaultStr = "abc,lmn,xyz";
 
     @Inject 

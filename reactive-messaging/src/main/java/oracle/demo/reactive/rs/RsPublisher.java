@@ -10,7 +10,7 @@ import org.reactivestreams.Subscriber;
 
 public class RsPublisher<T> implements Publisher<T> {
 
-    private static final Logger logger = Logger.getLogger(RsPublisher.class.getName());
+    private static final Logger logger = Logger.getLogger(RsPublisher.class.getSimpleName());
 
     @SuppressWarnings("unused") 
     private final String name;

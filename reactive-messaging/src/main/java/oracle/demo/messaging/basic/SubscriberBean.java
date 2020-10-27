@@ -15,7 +15,7 @@ import oracle.demo.reactive.FlowSubscriber;
 
 @ApplicationScoped
 public class SubscriberBean {
-    private final static Logger logger = Logger.getLogger(SubscriberBean.class.getName());
+    private final static Logger logger = Logger.getLogger(SubscriberBean.class.getSimpleName());
 
     @Inject private Processor processor;
 

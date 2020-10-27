@@ -27,7 +27,7 @@ import io.helidon.common.configurable.ThreadPoolSupplier;
 
 public class FilePublisher implements Publisher<Message<?>> {
 
-    private static Logger logger = Logger.getLogger(FilePublisher.class.getName());
+    private static Logger logger = Logger.getLogger(FilePublisher.class.getSimpleName());
 
     private final Path inputDir;
     private final Path archiveDir;

@@ -17,7 +17,7 @@ import io.helidon.messaging.connectors.kafka.KafkaMessage;
 
 @ApplicationScoped
 public class KafkaPublisher {
-    private final static Logger logger = Logger.getLogger(KafkaPublisher.class.getName());
+    private final static Logger logger = Logger.getLogger(KafkaPublisher.class.getSimpleName());
 
     private final SubmissionPublisher<KafkaMessage<String, String>> publisher = new SubmissionPublisher<>(
         ThreadPoolSupplier.builder().threadNamePrefix("kafka-pub-").build().get(),

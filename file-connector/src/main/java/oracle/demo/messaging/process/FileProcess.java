@@ -19,7 +19,7 @@ import oracle.demo.messaging.connector.OutFileMessage;
 @ApplicationScoped
 public class FileProcess {
 
-    private static Logger logger = Logger.getLogger(FileProcess.class.getName());
+    private static Logger logger = Logger.getLogger(FileProcess.class.getSimpleName());
 
  
     /**

@@ -18,7 +18,7 @@ import io.helidon.common.configurable.ThreadPoolSupplier;
 
 @ApplicationScoped
 public class MsgProcessingBean {
-    private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getName());
+    private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getSimpleName());
 
     // usging ForkJoinPool.commonPool() implicitly
     // private final SubmissionPublisher<Message> publisher = new SubmissionPublisher<>();

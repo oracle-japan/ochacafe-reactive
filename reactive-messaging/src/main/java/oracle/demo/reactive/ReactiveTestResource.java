@@ -34,7 +34,7 @@ import oracle.demo.common.Processor;
 @Path("/reactive")
 public class ReactiveTestResource {
 
-    private static final Logger logger = Logger.getLogger(ReactiveTestResource.class.getName());
+    private static final Logger logger = Logger.getLogger(ReactiveTestResource.class.getSimpleName());
     private final String defaultStr = "abc,lmn,xyz";
 
     @Inject private Processor processor;

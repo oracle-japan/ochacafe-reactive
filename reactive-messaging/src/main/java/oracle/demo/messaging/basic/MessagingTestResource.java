@@ -21,7 +21,7 @@ import oracle.demo.reactive.FlowMessage;
 @Path("/reactive-messaging")
 public class MessagingTestResource {
 
-    private static final Logger logger = Logger.getLogger(MessagingTestResource.class.getName());
+    private static final Logger logger = Logger.getLogger(MessagingTestResource.class.getSimpleName());
     private final String defaultStr = "abc,lmn,xyz";
 
     @Inject 

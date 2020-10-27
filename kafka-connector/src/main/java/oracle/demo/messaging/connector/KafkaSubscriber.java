@@ -10,7 +10,7 @@ import io.helidon.messaging.connectors.kafka.KafkaMessage;
 
 @ApplicationScoped
 public class KafkaSubscriber {
-    private final static Logger logger = Logger.getLogger(KafkaSubscriber.class.getName());
+    private final static Logger logger = Logger.getLogger(KafkaSubscriber.class.getSimpleName());
 
     @Incoming("kafka-sub")
     public void consume(KafkaMessage<String, String> message) {

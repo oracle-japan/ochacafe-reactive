@@ -17,7 +17,7 @@ import demo.messaging.KeyValueMessage.KeyValue;
 @Path("/")
 @ApplicationScoped
 public class MessagingResource {
-    private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getName());
+    private final static Logger logger = Logger.getLogger(MsgProcessingBean.class.getSimpleName());
 
     @Inject MsgProcessingBean processor;
 

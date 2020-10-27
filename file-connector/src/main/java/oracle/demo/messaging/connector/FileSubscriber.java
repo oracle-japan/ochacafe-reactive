@@ -18,7 +18,7 @@ import org.reactivestreams.Subscription;
 
 public class FileSubscriber implements Subscriber<Message<?>> {
 
-    private static Logger logger = Logger.getLogger(FileSubscriber.class.getName());
+    private static Logger logger = Logger.getLogger(FileSubscriber.class.getSimpleName());
 
     private final Path outputDir;
     private final String prefix;

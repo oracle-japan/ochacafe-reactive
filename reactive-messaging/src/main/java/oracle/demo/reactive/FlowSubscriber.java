@@ -10,7 +10,7 @@ import oracle.demo.common.Processor;
 
 public class FlowSubscriber implements Subscriber<FlowMessage> {
 
-    private static Logger logger = Logger.getLogger(FlowSubscriber.class.getName());
+    private static Logger logger = Logger.getLogger(FlowSubscriber.class.getSimpleName());
 
     private final Processor processor = CDI.current().select(Processor.class).get();
     

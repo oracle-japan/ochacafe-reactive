@@ -9,7 +9,7 @@ import org.reactivestreams.Subscription;
 
 public class RsSubscriber<T> implements Subscriber<T> {
 
-    private final static Logger logger = Logger.getLogger(RsSubscriber.class.getName());
+    private final static Logger logger = Logger.getLogger(RsSubscriber.class.getSimpleName());
     private final static long defaultBufferSize = 256;
 
     private final String name;

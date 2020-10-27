@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import org.eclipse.microprofile.reactive.messaging.Message;
 
 public abstract class FileMessage<T> implements Message<T>{
-    private static Logger logger = Logger.getLogger(FileMessage.class.getName());
+    private static Logger logger = Logger.getLogger(FileMessage.class.getSimpleName());
 
     private final T payload;
     private final Supplier<CompletionStage<Void>> ackSupplier;

@@ -24,7 +24,7 @@ import oracle.demo.common.Processor;
 @Path("/reactive")
 public class RsTestResource {
 
-    private static final Logger logger = Logger.getLogger(RsTestResource.class.getName());
+    private static final Logger logger = Logger.getLogger(RsTestResource.class.getSimpleName());
     private final String defaultStr = "abc,lmn,xyz";
 
     @Inject private Processor processor;
@@ -40,6 +40,7 @@ public class RsTestResource {
         final RsPublisher<RsMessage> publisher = new RsPublisher<>("RsPublisher");
         final RsSubscriber<RsMessage> subscriber = new RsSubscriber<>(
             "RsSubscriber", 
+            4, // buffer size
             message -> message.complete(processor.process(message.getRequest())) // onNext()の実際の処理
           );
         publisher.subscribe(subscriber);

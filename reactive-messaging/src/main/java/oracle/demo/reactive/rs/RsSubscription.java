@@ -9,7 +9,7 @@ import org.reactivestreams.Subscription;
 
 public class RsSubscription<T> implements Subscription {
 
-    private static final Logger logger = Logger.getLogger(RsSubscription.class.getName());
+    private static final Logger logger = Logger.getLogger(RsSubscription.class.getSimpleName());
 
     @SuppressWarnings("unused")
     private final RsPublisher<T> publisher;

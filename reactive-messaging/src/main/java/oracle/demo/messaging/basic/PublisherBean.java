@@ -17,7 +17,7 @@ import oracle.demo.reactive.FlowMessage;
 
 @ApplicationScoped
 public class PublisherBean {
-    private final static Logger logger = Logger.getLogger(PublisherBean.class.getName());
+    private final static Logger logger = Logger.getLogger(PublisherBean.class.getSimpleName());
 
     ///// 実装方法 その1
 

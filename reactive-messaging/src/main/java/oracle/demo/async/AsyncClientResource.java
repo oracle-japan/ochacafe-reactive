@@ -25,7 +25,7 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 @Path("/async-client")
 public class AsyncClientResource {
 
-    private static Logger logger = Logger.getLogger(AsyncClientResource.class.getName());
+    private static Logger logger = Logger.getLogger(AsyncClientResource.class.getSimpleName());
     private final Client client = ClientBuilder.newClient(); // thread safe
     private final String defaultStr = "abc,lmn,xyz";
 

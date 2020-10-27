@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/kafka")
 @ApplicationScoped
 public class KafkaResource {
-    //private final static Logger logger = Logger.getLogger(KafkaResource.class.getName());
+    //private final static Logger logger = Logger.getLogger(KafkaResource.class.getSimpleName());
 
     @Inject
     private KafkaPublisher publisher;
