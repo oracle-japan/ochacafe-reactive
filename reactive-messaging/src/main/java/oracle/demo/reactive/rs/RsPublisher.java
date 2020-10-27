@@ -25,7 +25,7 @@ public class RsPublisher<T> implements Publisher<T> {
 
     @Override
     public void subscribe(Subscriber<? super T> subscriber) {
-        RsSubscription<T> subscription = new RsSubscription(this, subscriber);
+        RsSubscription<T> subscription = new RsSubscription<>(this, subscriber);
         subscriptions.add(subscription);
     }
 
