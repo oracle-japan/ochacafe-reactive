@@ -1,3 +1,5 @@
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/oracle-japan/ochacafe-reactive)
+
 # Reactive Programing デモのソース 
 
 For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connpass.com/event/189340/)
