@@ -34,7 +34,7 @@ public class FileProcess {
     @Acknowledgment(Acknowledgment.Strategy.MANUAL)
     public Message<byte[]> in(InFileMessage<Path> message) throws IOException{
         logger.info("--- in() ---");
-        byte[] payload = Files.readAllBytes(message.getPayload());
+        byte[] payload = Files.readAllBytes(message.getPayload()); // Pathから全バイト読み込み
         logger.info("[payload]\n" + new String(payload));
         return Message.of(payload, message::ack);
     }
