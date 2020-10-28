@@ -10,8 +10,8 @@ For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connp
 ~~~
 .
 ├── reactive-messaging [各種デモ]
-├── messaging-example [MicroProfile Reactive Streams Messagingのシンプルな利用例]
-├── file-connector [MicroProfile Reactive Streams Messagingを使ったFile Connector作成例]
+├── messaging-example [MicroProfile Reactive Messagingのシンプルな利用例]
+├── file-connector [MicroProfile Reactive Messagingを使ったFile Connector作成例]
 └── kafka-connector [Helidon Kafka Connectorの使用例]
 ~~~
 
@@ -115,7 +115,7 @@ cat /tmp/file-connector/out/*
 
 ## その他
 
-Server-Sent Event と MicroProfile Reactive Streams Messaging を組み合わせたデモは、[こちら](https://github.com/oracle/helidon/tree/master/examples/microprofile/messaging-sse) から入手できます。
+Server-Sent Event と MicroProfile Reactive Messaging を組み合わせたデモは、[こちら](https://github.com/oracle/helidon/tree/master/examples/microprofile/messaging-sse) から入手できます。
 
 
 ---
