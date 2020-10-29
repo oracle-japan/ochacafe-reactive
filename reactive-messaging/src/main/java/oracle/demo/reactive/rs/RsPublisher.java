@@ -12,7 +12,7 @@ public class RsPublisher<T> implements Publisher<T> {
 
     private static final Logger logger = Logger.getLogger(RsPublisher.class.getSimpleName());
 
-    @SuppressWarnings("unused") 
+    @SuppressWarnings("unused")
     private final String name;
     private final List<RsSubscription<T>> subscriptions = Collections.synchronizedList(new ArrayList<>());
 

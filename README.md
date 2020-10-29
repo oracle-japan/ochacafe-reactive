@@ -90,6 +90,7 @@ curl localhost:8080/reactive-messaging/basic?str=abc,lmn,xyz
 # MicroProfile Reactive Messagning - Processor でチャネルを連結
 curl localhost:8080/reactive-messaging/process/key1?value=val1
 
+curl -X POST -H "Content-type: application/json" -d '{"key":"key1","value":"val1"}' localhost:8080/reactive-messaging/process
 
 ### Kafka Connector
 ## cd kafka-connector; java -jar target/kafka-connector.jar
