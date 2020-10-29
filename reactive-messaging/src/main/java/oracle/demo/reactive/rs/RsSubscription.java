@@ -11,6 +11,7 @@ public class RsSubscription<T> implements Subscription {
 
     private static final Logger logger = Logger.getLogger(RsSubscription.class.getName());
 
+    @SuppressWarnings("unused")
     private final RsPublisher<T> publisher;
     private final Subscriber<? super T> subscriber;
     private final ExecutorService es;

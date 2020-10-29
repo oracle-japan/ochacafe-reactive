@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,8 +31,9 @@ public class ProcessorTestResource {
     @GET @Path("/process/{key}") @Produces(MediaType.TEXT_PLAIN)
     public String submit(@PathParam("key") String key, @QueryParam("value") String value) {
         logger.info(String.format("@GET /submit: key=%s, value=%s", key, value));
-        processor.submit(new KeyValue(key, value));
-        return "OK\n";
+        KeyValue kv = new KeyValue(key, value);
+        processor.submit(kv);
+        return kv.getResponse();
     }
 
     /**
@@ -45,7 +45,7 @@ public class ProcessorTestResource {
     public String submit(KeyValue kv) {
         logger.info(String.format("@POST /submit: key=%s, value=%s", kv.getKey(), kv.getValue()));
         processor.submit(kv);
-        return "OK\n";
+        return kv.getResponse();
     }
 
 }

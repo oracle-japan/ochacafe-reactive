@@ -1,14 +1,11 @@
 package oracle.demo.messaging.processor;
 
-import java.util.Objects;
 import java.util.concurrent.Flow;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.SubmissionPublisher;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -49,15 +46,16 @@ public class MsgProcessingBean {
 
     @Incoming("channel-1")
     @Outgoing("channel-2")
-    public String process(KeyValueMessage message) {
+    public KeyValue process(KeyValueMessage message) {
         logger.info("Processing [channel-1 -> channel-2]: " + message.getPayload());
-        KeyValue kv = message.getPayload();
-        return processor.process(kv.getKey() + "=" + kv.getValue());
+        return message.getPayload();
     }
 
     @Incoming("channel-2")
-    public void consume(String message) {
-        logger.info(String.format("Consuming [channel-2]: %s", message));
+    public void consume(KeyValue kv) {
+        logger.info(String.format("Consuming [channel-2]: %s", kv));
+        String response = processor.process(kv.getKey() + "=" + kv.getValue());
+        kv.setResponse(response);
     }
 
 }

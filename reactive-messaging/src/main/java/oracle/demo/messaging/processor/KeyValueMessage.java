@@ -46,6 +46,7 @@ public class KeyValueMessage implements Message<KeyValueMessage.KeyValue>{
 	public static class KeyValue {
 		private String key;
 		private String value;
+		private CompletableFuture<String> f = new CompletableFuture<>();
 	
 		public KeyValue() {}
 	
@@ -68,6 +69,14 @@ public class KeyValueMessage implements Message<KeyValueMessage.KeyValue>{
 		
 		public String toString(){
 			return String.format("[key=%s, value=%s]", key, value);
+		}
+
+		public void setResponse(String response){
+			f.complete(response);
+		}
+
+		public String getResponse(){
+			return f.join();
 		}
 	}
 
