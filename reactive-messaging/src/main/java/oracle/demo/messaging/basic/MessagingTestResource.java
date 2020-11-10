@@ -47,7 +47,7 @@ public class MessagingTestResource {
                 .map(CompletableFuture::join) // 実行結果を取得
                 .reduce(null, (x, y) -> Optional.ofNullable(x).isPresent() ? x + "," + y : y);
             }catch(Exception e){
-                throw new RuntimeException("Reactive Streams Messaging error: " + e.getMessage());
+                throw new RuntimeException("Reactive Messaging error: " + e.getMessage());
             }
         });
     }

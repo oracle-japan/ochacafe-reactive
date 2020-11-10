@@ -44,7 +44,7 @@ public class KafkaPublisher {
     }
 
     // Kafka Connector
-    // based on MicroProfile Reactive Streams Messaging
+    // based on MicroProfile Reactive Messaging
     @Outgoing("kafka-pub")
     public Publisher<KafkaMessage<String, String>> preparePublisher() {
         return ReactiveStreams

@@ -1,2 +1,2 @@
-# Simple example of Reactive Streams Messaging with Helidon
+# Simple example of Reactive Messaging with Helidon
 
