@@ -1,2 +1,6 @@
-.vscode
+/.*
+!.gitignore
+
+workspace.code-workspace
+
 /helidon-messaging-example
