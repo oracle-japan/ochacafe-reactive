@@ -102,7 +102,7 @@ public class FilePublisher implements Publisher<Message<?>> {
                             workingFiles.add(path);
 
                             // ack supplier -> move file to archive directory
-                            Supplier<CompletionStage<Void>> ackSupplier = () -> {
+                            final Supplier<CompletionStage<Void>> ackSupplier = () -> {
                                 return CompletableFuture.runAsync(() -> {
                                     final Path archivePath = 
                                     Paths.get(

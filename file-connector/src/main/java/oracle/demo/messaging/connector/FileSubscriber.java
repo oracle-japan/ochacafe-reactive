@@ -62,7 +62,7 @@ public class FileSubscriber implements Subscriber<Message<?>> {
             message.ack();
         }catch(Exception e) {
             subscription.cancel();
-            logger.log(Level.SEVERE, "Couldn't write to file: " + e.getMessage(), e);
+            logger.log(Level.SEVERE, "Couldn't write message to file: " + e.getMessage(), e);
         }
     }
 
