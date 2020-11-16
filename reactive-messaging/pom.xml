@@ -29,6 +29,11 @@
             <groupId>io.helidon.microprofile.messaging</groupId>
             <artifactId>helidon-microprofile-messaging</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.helidon.microprofile.messaging</groupId>
+            <artifactId>helidon-microprofile-messaging-health</artifactId>
+            <version>2.1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>io.helidon.microprofile</groupId>
