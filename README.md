@@ -18,9 +18,9 @@ For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connp
 ## ビルド方法
 
 
-各ディレクトリから `mvn package` でビルドできます。Java 11が必要です。  
-`java -jar target/xxx.jar` で(Helidonのプロセスが)起動します。
-
+各サブディレクトリから `mvn package` でビルドできます。Java 11が必要です。  
+`java -jar target/xxx.jar` で(Helidonのプロセスが)起動します。  
+ルートディレクりから `mvn package` で全てのサブディレクトリのビルドもできます。
 
 ## テストの方法
 
