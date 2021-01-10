@@ -113,6 +113,63 @@ echo "Hello Ochacafe" > /tmp/file-connector/in/test.dat
 cat /tmp/file-connector/out/*
 ```
 
+## Reactive Messaging チャネルの health 確認
+
+pom.xml に モジュルールを追加するこによって、MicroProfile Health の Readiness を使ったチャネル正常性確認ができます。
+
+```xml
+    <dependency>
+        <groupId>io.helidon.microprofile.messaging</groupId>
+        <artifactId>helidon-microprofile-messaging-health</artifactId>
+    </dependency>
+```
+
+```bash
+# reactive-messaging プロジェクト
+$ curl -s localhost:8080/health/ready | jq
+{
+  "outcome": "UP",
+  "status": "UP",
+  "checks": [
+    {
+      "name": "messaging",
+      "state": "UP",
+      "status": "UP",
+      "data": {
+        "channel-1": "UP",
+        "channel-2": "UP",
+        "messaging-demo": "UP"
+      }
+    }
+  ]
+}
+
+# kafka-connector プロジェクト
+$ curl -s localhost:8080/health/ready | jq
+{
+  "outcome": "UP",
+  "status": "UP",
+  "checks": [
+    {
+      "name": "messaging",
+      "state": "UP",
+      "status": "UP",
+      "data": {
+        "kafka-pub": "UP",
+        "kafka-sub": "UP"
+      }
+    }
+  ]
+}
+
+# file-connector プロジェクト
+$ curl -s localhost:8081/health/ready | jq .checks[].data
+{
+  "file-in": "UP",
+  "file-out": "UP",
+  "file-process": "UP"
+}
+```
 
 ## その他
 
@@ -120,6 +177,6 @@ Server-Sent Event と MicroProfile Reactive Messaging を組み合わせたデ�
 
 
 ---
-_Copyright © 2020, Oracle and/or its affiliates. All rights reserved._
+_Copyright © 2020ｰ2021, Oracle and/or its affiliates. All rights reserved._
 
 
