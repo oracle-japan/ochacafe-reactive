@@ -104,6 +104,8 @@ public class FilePublisher implements Publisher<Message<?>> {
                             // ack supplier -> move file to archive directory
                             final Supplier<CompletionStage<Void>> ackSupplier = () -> {
                                 return CompletableFuture.runAsync(() -> {
+                                    logger.fine("ack() process is running");
+
                                     final Path archivePath = 
                                     Paths.get(
                                         archiveDir.toString(), 

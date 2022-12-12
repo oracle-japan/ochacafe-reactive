@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
@@ -62,7 +62,7 @@ public class FileProcess {
     @Outgoing("file-out")
     public OutFileMessage<String> out(Message<byte[]> message) throws IOException{
         logger.info("--- out() ---");
-        return OutFileMessage.of(new String(message.getPayload()).toUpperCase());
+        return OutFileMessage.of(new String(message.getPayload()).toUpperCase(), message.getAck());
     }
 
 }

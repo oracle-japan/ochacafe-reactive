@@ -5,7 +5,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.SubmissionPublisher;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;

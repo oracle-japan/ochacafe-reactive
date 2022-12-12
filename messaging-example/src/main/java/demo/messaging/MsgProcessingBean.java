@@ -5,7 +5,7 @@ import java.util.concurrent.SubmissionPublisher;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -37,9 +37,8 @@ public class MsgProcessingBean {
     }
 
     @Incoming("test-channel")
-    public void consume(KeyValueMessage message) {
+    public void consume(KeyValue kv) {
         /* DO AN ACTUAL JOB HERE!! */
-        KeyValue kv = message.getPayload();
         logger.info(String.format("Consuming Message: key=%s, value=%s", kv.getKey(), kv.getValue()));
         try{
             TimeUnit.MILLISECONDS.sleep(2000);

@@ -33,16 +33,18 @@ public class KeyValueMessage implements Message<KeyValueMessage.KeyValue>{
 		return new KeyValueMessage(payload, ack);
 	}
 
-	@Override
-	public KeyValueMessage.KeyValue getPayload() {
-		return payload;
-	}
 
     @Override
     public CompletionStage<Void> ack(){
         return ack.get();
 	}
-		
+
+	@Override
+	public KeyValueMessage.KeyValue getPayload() {
+		return payload;
+	}
+
+
 	public static class KeyValue {
 		private String key;
 		private String value;

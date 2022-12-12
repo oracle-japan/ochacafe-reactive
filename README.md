@@ -4,6 +4,9 @@
 
 For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connpass.com/event/189340/)
 
+ベースを Helidon 3.x 系に更新しました。 準拠する仕様が Reactive Messaging 2.0 に更新されたので、Helidon 2.x ベースのサンプルのソースとは互換性がありません。
+Helidon 2.x ベースのソースは helidon-2.x ブランチを参照下さい。
+
 
 ## デモのソース
 
@@ -18,7 +21,7 @@ For [OCHaCafe 3 - #4 挑戦! JavaでReactiveプログラミング](https://connp
 ## ビルド方法
 
 
-各サブディレクトリから `mvn package` でビルドできます。Java 11が必要です。  
+各サブディレクトリから `mvn package` でビルドできます。Java 17が必要です。  
 `java -jar target/xxx.jar` で(Helidonのプロセスが)起動します。  
 ルートディレクりから `mvn package` で全てのサブディレクトリのビルドもできます。
 
@@ -175,8 +178,5 @@ $ curl -s localhost:8081/health/ready | jq .checks[].data
 
 Server-Sent Event と MicroProfile Reactive Messaging を組み合わせたデモは、[こちら](https://github.com/oracle/helidon/tree/master/examples/microprofile/messaging-sse) から入手できます。
 
-
----
-_Copyright © 2020ｰ2021, Oracle and/or its affiliates. All rights reserved._
 
 

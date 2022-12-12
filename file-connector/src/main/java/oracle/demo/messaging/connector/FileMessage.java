@@ -29,7 +29,7 @@ public abstract class FileMessage<T> implements Message<T>{
 
     @Override
     public CompletionStage<Void> ack(){
-        logger.fine("ack(): " + this);
+        logger.info("ack(): " + this);
         return ackSupplier.get();
     }
 

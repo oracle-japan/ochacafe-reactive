@@ -4,8 +4,8 @@ import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
@@ -46,9 +46,9 @@ public class MsgProcessingBean {
 
     @Incoming("channel-1")
     @Outgoing("channel-2")
-    public KeyValue process(KeyValueMessage message) {
+    public KeyValueMessage process(KeyValueMessage message) {
         logger.info("Processing [channel-1 -> channel-2]: " + message.getPayload());
-        return message.getPayload();
+        return message;
     }
 
     @Incoming("channel-2")

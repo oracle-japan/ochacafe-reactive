@@ -61,8 +61,9 @@ public class FileSubscriber implements Subscriber<Message<?>> {
             logger.info(String.format("Message was written to %s", outPath.toString()));
             message.ack();
         }catch(Exception e) {
-            subscription.cancel();
+            //subscription.cancel();
             logger.log(Level.SEVERE, "Couldn't write message to file: " + e.getMessage(), e);
+            message.nack(e);
         }
     }
 

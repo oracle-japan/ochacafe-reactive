@@ -18,7 +18,7 @@ public class OutFileMessage<T> extends FileMessage<T>{
         return new OutFileMessage<>(payload);
     }
 
-    public static <T> FileMessage<T> of(T payload, Supplier<CompletionStage<Void>> ackSupplier){
+    public static <T> OutFileMessage<T> of(T payload, Supplier<CompletionStage<Void>> ackSupplier){
         return new OutFileMessage<>(payload, ackSupplier);
     } 
    
